@@ -1,6 +1,4 @@
 ---
-sudo: required
-
 env:
   #Linux Docker images for three different CPU architectures: x64, arm and arm64
   # matrix:
@@ -26,19 +24,19 @@ services:
 
 
 before_install:
-   - 'sudo docker build --rm=true --file=tests/dockerfiles/Dockerfile.${distribution}-${version} --tag=${distribution}-${version}:ansible tests '
+   - 'docker build --rm=true --file=tests/dockerfiles/Dockerfile.${distribution}-${version} --tag=${distribution}-${version}:ansible tests '
 
 script:
   # Create a random file to store the container ID.
   - container_id=$(mktemp)
   - role_name="ansible-role-openvswitch"
   # Run container in detached state
-  - 'sudo docker run --detach --volume="${PWD}":/etc/ansible/roles/${role_name}:ro ${run_opts} ${distribution}-${version}:ansible "${init}" > "${container_id}" '
+  - 'docker run --detach --volume="${PWD}":/etc/ansible/roles/${role_name}:ro ${run_opts} ${distribution}-${version}:ansible "${init}" > "${container_id}" '
   # Ansible syntax check.
-  - 'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=true ansible-playbook -v /etc/ansible/roles/${role_name}/tests/test.yml --syntax-check'
+  - 'docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=true ansible-playbook -v /etc/ansible/roles/${role_name}/tests/test.yml --syntax-check'
 
   # Test role.
-  - 'sudo docker exec  "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=true ansible-playbook  /etc/ansible/roles/${role_name}/tests/test.yml'
+  - 'docker exec  "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=true ansible-playbook  /etc/ansible/roles/${role_name}/tests/test.yml'
 
  # Notify Ansible Galaxy when an ansible role builds successfully.
 notifications:
