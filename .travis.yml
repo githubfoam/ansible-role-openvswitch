@@ -45,4 +45,3 @@ notifications:
 
 after_success:
   - docker images
-  - docker login -u $DOCKER_USER --password-stdin $DOCKER_PASSWORD
