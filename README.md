@@ -1,7 +1,9 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+A brief description of the role goes here.  
+TravisCI master branch status
+[![Build Status](https://travis-ci.com/githubfoam/ansible-role-openvswitch.svg?branch=master)](https://travis-ci.com/githubfoam/ansible-role-openvswitch) 
 
 Requirements
 ------------
