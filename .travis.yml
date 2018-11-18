@@ -11,7 +11,10 @@ env:
       version=1804
       init=/lib/systemd/systemd
       run_opts="--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
-
+  -  distribution=ubuntu
+      version=1604
+      init=/lib/systemd/systemd
+      run_opts="--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
   -  distribution=centos
       version=7
       init=/usr/lib/systemd/systemd
