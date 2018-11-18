@@ -45,7 +45,7 @@ notifications:
 
 after_success:
   - docker images
-  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  - docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_PASSWORD
   - export REPO=githubfoam/ansible-role-openvswitch
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   - docker build --file=tests/dockerfiles/Dockerfile.${distribution}-${version} -t $REPO:$COMMIT
