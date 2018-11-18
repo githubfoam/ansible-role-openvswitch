@@ -5,7 +5,6 @@ env:
   #  - ARCH: arm
   #  - ARCH: arm64
   #  - ARCH: amd64
-  - COMMIT=${TRAVIS_COMMIT::8}
   -  distribution=ubuntu
       version=1804
       init=/lib/systemd/systemd
@@ -47,9 +46,7 @@ notifications:
 after_success:
   - docker images
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-  - export REPO=sebestblog/travis-demo
+  - export REPO=githubfoam/ansible-role-openvswitch
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   - docker build --file=tests/dockerfiles/Dockerfile.${distribution}-${version} -t $REPO:$COMMIT
-  - docker tag $REPO:$COMMIT $REPO:$TAG
-  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
   - docker push $REPO
