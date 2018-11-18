@@ -8,3 +8,5 @@
   set_fact:
     apache_packages: "{{ openvswitch_packages | list }}"
   when: openvswitch_packages is not defined
+
+- include_tasks: "{{ ansible_os_family }}-install.yml"
