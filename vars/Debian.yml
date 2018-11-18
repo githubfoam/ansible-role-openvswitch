@@ -1,3 +1,4 @@
 ---
 openvswitch_packages:
   - openvswitch-switch
+  - openvswitch-common
