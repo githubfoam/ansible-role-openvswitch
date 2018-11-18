@@ -1,5 +1,5 @@
 galaxy_info:
-  role_name: apache
+  role_name: openvswitch
   author: githubfoam
   description: ansible role to deploy openvswitch
   company: NA
