@@ -44,4 +44,5 @@ notifications:
    webhooks: https://galaxy.ansible.com/api/v1/notifications/
 
 after_success:
-  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - docker images
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
