@@ -1,6 +1,5 @@
 ---
 - name: Ensure Apache is installed
   package:
-    name: "{{ apache_packages }}"
-    state: "{{ apache_packages_state }}"
-    enablerepo: "{{ apache_enablerepo | default(omit, true) }}"
+    name: "{{ openvswitch_packages }}"
+    state: "{{ openvswitch_packages_state }}"
