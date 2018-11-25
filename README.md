@@ -1,41 +1,42 @@
-Role Name
+openvswitch
 =========
 
-A brief description of the role goes here.  
-TravisCI   
-travis branch status  
-[![Build Status](https://travis-ci.com/githubfoam/ansible-role-openvswitch.svg?branch=travisci)](https://travis-ci.com/githubfoam/ansible-role-openvswitch)
+Ansible Role: [![Ansible Role](https://img.shields.io/ansible/role/d/32899.svg?style=plastic)](https://galaxy.ansible.com/githubfoam/openvswitch)  
+Ansible Role: [![Ansible Role](https://img.shields.io/ansible/role/32899.svg)](https://galaxy.ansible.com/githubfoam/openvswitch)   
 
-Requirements
-------------
+Travis (.com) branch:
+[![Build Status](https://travis-ci.com/githubfoam/ansible-role-openvswitch.svg?branch=badges)](https://travis-ci.com/githubfoam/ansible-role-openvswitch)  
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+[![Docker Automated build](https://img.shields.io/docker/automated/dockerfoam/openvswitch.svg?style=plastic)](https://hub.docker.com/r/dockerfoam/openvswitch/)  
+[![Docker Pulls](https://img.shields.io/docker/pulls/dockerfoam/openvswitch.svg?style=plastic)](https://hub.docker.com/r/dockerfoam/openvswitch/)  
+[![Docker Stars](https://img.shields.io/docker/stars/dockerfoam/openvswitch.svg?style=plastic)](https://hub.docker.com/r/dockerfoam/openvswitch/)
 
-Role Variables
---------------
+[![GitHub search hit counter](https://img.shields.io/github/search/githubfoam/ansible-role-openvswitch/goto.svg)](https://github.com/githubfoam/ansible-role-openvswitch)  
+[![GitHub](https://img.shields.io/github/license/githubfoam/ansible-role-openvswitch.svg?style=plastic)](https://github.com/githubfoam/ansible-role-openvswitch)
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Playbook
+----------------
+
+
+File:
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: githubfoam.openvswitch }
+
+Command:
+
+             - $ ansible-galaxy install --roles-path . githubfoam.openvswitch
+
 
 License
 -------
 
-BSD
+GNU General Public License v3.0
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+An optional section for the role authors
