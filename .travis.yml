@@ -33,7 +33,7 @@ jobs:
       script:
         # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
         - curl https://registry.hub.docker.com/u/dockerfoam/openvswitch/trigger/$DOCKER_TOKEN/
-    - stage: Continuous Deployment Step, one button to deploy, push docker image
+    - stage: Continuous Deployment Step, one button to deploy docker image
       script:
         # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
         - curl https://registry.hub.docker.com/u/dockerfoam/openvswitch/trigger/$DOCKER_TOKEN/
