@@ -4,4 +4,4 @@ RUN apt-get update && \
   apt-add-repository ppa:ansible/ansible && \
   apt-get update && \
   apt-get install ansible -y
-RUN ansible-galaxy install githubfoam.onos
+RUN ansible-galaxy install githubfoam.openvswitch
