@@ -6,9 +6,9 @@ Ansible Role: [![Ansible Role](https://img.shields.io/ansible/role/32899.svg)](h
 
 Travis (.com) master branch:
 [![Build Status](https://travis-ci.com/githubfoam/ansible-role-openvswitch.svg?branch=master)](https://travis-ci.com/githubfoam/ansible-role-openvswitch)  
-Travis (.com) branch:
+Travis (.com) test branch:
 [![Build Status](https://travis-ci.com/githubfoam/ansible-role-openvswitch.svg?branch=test)](https://travis-ci.com/githubfoam/ansible-role-openvswitch)  
-Travis (.com) branch:
+Travis (.com) dev branch:
 [![Build Status](https://travis-ci.com/githubfoam/ansible-role-openvswitch.svg?branch=dev)](https://travis-ci.com/githubfoam/ansible-role-openvswitch)  
 
 
