@@ -34,13 +34,16 @@ jobs:
         - rake kitchen:verify:default-ubuntu-1604
     - stage: kitchen destroy
       script:
-        # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
-        - echo "success"
         - rake kitchen:destroy:default-ubuntu-1604
-after_success:
-    - stage: Workflow ends
+    - stage: Continuous Delivery Step, black box DAST etc tests
       script:
-        - echo "success"
+        # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
+        - curl https://registry.hub.docker.com/u/dockerfoam/onos/trigger/$DOCKER_TOKEN/
+after_success:
+    - stage: Continuous Deployment Step, one button to deploy docker image
+      script:
+        # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
+        - curl https://registry.hub.docker.com/u/dockerfoam/onos/trigger/$DOCKER_TOKEN/
 # Notify Ansible Galaxy when an ansible role builds successfully.
 notifications:
   #email: false
