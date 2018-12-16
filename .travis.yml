@@ -31,10 +31,11 @@ jobs:
       script:
         # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
         - chef exec ruby --version
-    - stage: Continuous Deployment Step, one button to deploy docker image
+    - stage: kitchen destroy
       script:
         # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
         - echo "success"
+        - rake kitchen:destroy:default-ubuntu-1604
 after_success:
     - stage: Workflow ends
       script:
