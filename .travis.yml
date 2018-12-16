@@ -11,7 +11,7 @@ env:
    - COMMIT=${TRAVIS_COMMIT::8}
   matrix:
     - INSTANCE=default-ubuntu-1604
-  #   - INSTANCE=default-centos-74
+  # - INSTANCE=default-centos-74
 services:
   - docker
 before_install:
@@ -20,17 +20,18 @@ before_install:
   - rvm version
 jobs:
   include:
-    - stage: Continuous Integration Step, white box SAST etc tests
+    - stage: kitchen create
     # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142455888
       before_script:
         - sudo iptables -L DOCKER || sudo iptables -N DOCKER
       script:
-        # Create a random file to store the container ID.
-        - chef --version
-    - stage: Continuous Delivery Step, black box DAST etc tests
+        - rake kitchen:create:default-ubuntu-1604
+    - stage: kitchen converge
       script:
-        # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
-        - chef exec ruby --version
+        - rake kitchen:converge:default-ubuntu-1604
+    - stage: kitchen verify
+      script:
+        - rake kitchen:verify:default-ubuntu-1604
     - stage: kitchen destroy
       script:
         # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
