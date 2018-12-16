@@ -1,6 +1,8 @@
 ---
 language: ruby
-rvm: 2.3
+rvm:
+  - 2.3
+  - 2.5
 sudo: required
 env:
   global:
@@ -12,16 +14,17 @@ services:
 before_install:
   - curl -L https://www.getchef.com/chef/install.sh | sudo bash -s -- -P chefdk -v 3.5.13
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  - rvm version
 jobs:
   include:
     - stage: Continuous Integration Step, white box SAST etc tests
       script:
         # Create a random file to store the container ID.
-        - echo "success"
+        - chef --version
     - stage: Continuous Delivery Step, black box DAST etc tests
       script:
         # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
-        - echo "success"
+        - chef exec ruby --version"
     - stage: Continuous Deployment Step, one button to deploy docker image
       script:
         # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
