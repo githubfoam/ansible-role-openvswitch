@@ -1,5 +1,5 @@
 ---
-- name: Ensure Apache is installed
+- name: Ensure openvswitch is installed
   package:
     name: "{{ openvswitch_packages }}"
     state: "{{ openvswitch_packages_state }}"
