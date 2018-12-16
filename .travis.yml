@@ -9,6 +9,9 @@ env:
    - distribution=ubuntu
      version=18.04
    - COMMIT=${TRAVIS_COMMIT::8}
+  # matrix:
+  #   - INSTANCE=default-ubuntu-1604
+  #   - INSTANCE=default-centos-74
 services:
   - docker
 before_install:
@@ -18,6 +21,9 @@ before_install:
 jobs:
   include:
     - stage: Continuous Integration Step, white box SAST etc tests
+    # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142455888
+      before_script:
+        - sudo iptables -L DOCKER || sudo iptables -N DOCKER
       script:
         # Create a random file to store the container ID.
         - chef --version
