@@ -2,5 +2,5 @@
 # tasks file for apache
 - name: Update apt cache.
   apt: update_cache=yes
-- name: Ensure Apache is installed on Debian.
+- name: Ensure openvswitch is installed on Debian.
   apt: "name={{ openvswitch_packages }} state={{ openvswitch_packages_state }}"
