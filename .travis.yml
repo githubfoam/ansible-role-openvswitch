@@ -24,7 +24,7 @@ jobs:
     - stage: Continuous Delivery Step, black box DAST etc tests
       script:
         # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
-        - chef exec ruby --version"
+        - chef exec ruby --version
     - stage: Continuous Deployment Step, one button to deploy docker image
       script:
         # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
