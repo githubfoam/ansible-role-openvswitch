@@ -1,46 +1,49 @@
 ---
+language: ruby
+rvm:
+  #- 2.3
+  - 2.5
 sudo: required
 env:
   global:
    - distribution=ubuntu
      version=18.04
    - COMMIT=${TRAVIS_COMMIT::8}
+  matrix:
+    - INSTANCE=default-ubuntu-1604
+  # - INSTANCE=default-centos-74
 services:
   - docker
 before_install:
-  - docker pull ${distribution}:${version}
+  - curl -L https://www.getchef.com/chef/install.sh | sudo bash -s -- -P chefdk -v 3.5.13
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  - rvm version
 jobs:
   include:
-    - stage: Continuous Integration Step, white box SAST etc tests
+    - stage: kitchen create
+    # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142455888
+      before_script:
+        - sudo iptables -L DOCKER || sudo iptables -N DOCKER
       script:
-        # Create a random file to store the container ID.
-        - container_id=$(mktemp)
-        - role_name="ansible-role-openvswitch"
-        # Run container in detached state
-        - docker run -t -d ${distribution}:${version} > "${container_id}"
-        # Install ansible on the same container via container_id
-        - docker exec "$(cat ${container_id})" apt-get update
-        - docker exec "$(cat ${container_id})" apt-get install software-properties-common -y
-        - docker exec "$(cat ${container_id})" apt-add-repository --yes --update ppa:ansible/ansible
-        - docker exec "$(cat ${container_id})" apt-get install ansible -y
-        - docker exec "$(cat ${container_id})" mkdir /etc/ansible/roles/${role_name}
-        - docker cp "${PWD}/." "$(cat ${container_id})":/etc/ansible/roles/${role_name}
-        # Ansible syntax check.
-        - docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=true ansible-playbook -v /etc/ansible/roles/${role_name}/tests/test.yml --syntax-check
-        # Test role.
-        - docker exec  "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=true ansible-playbook  /etc/ansible/roles/${role_name}/tests/test.yml
+        - rake kitchen:create:default-ubuntu-1604
+    - stage: kitchen converge
+      script:
+        - rake kitchen:converge:default-ubuntu-1604
+    - stage: kitchen verify
+      script:
+        - rake kitchen:verify:default-ubuntu-1604
+    - stage: kitchen destroy
+      script:
+        - rake kitchen:destroy:default-ubuntu-1604
     - stage: Continuous Delivery Step, black box DAST etc tests
       script:
         # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
-        - curl https://registry.hub.docker.com/u/dockerfoam/openvswitch/trigger/$DOCKER_TOKEN/
+        - curl https://registry.hub.docker.com/u/dockerfoam/onos/trigger/$DOCKER_TOKEN/
+after_success:
     - stage: Continuous Deployment Step, one button to deploy docker image
       script:
         # DODCKER_TOKEN must be entered travis website -> repository -> settings -> environment variables
-        - curl https://registry.hub.docker.com/u/dockerfoam/openvswitch/trigger/$DOCKER_TOKEN/
-after_success:
-    - stage: Workflow ends
-      script:
-        - echo "success"
+        - curl https://registry.hub.docker.com/u/dockerfoam/onos/trigger/$DOCKER_TOKEN/
 # Notify Ansible Galaxy when an ansible role builds successfully.
 notifications:
   #email: false
