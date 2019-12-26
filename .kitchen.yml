@@ -13,18 +13,7 @@ driver:
   # use_sudo=false
 
 platforms:
-  # - name: ubuntu-14.04
  - name: ubuntu-16.04 # works fine
-   # - name: ubuntu-18.04
-  # - name: centos-7.1
-  # - name: centos-7.2
-  # - name: centos-7.4 # almost works fine
-  # - name: fedora-29
-  # - name: fedora-28
-  # - name: fedora:29
-  #   driver_config:
-  #     image: fedora:28
-  #     platform: centos
 
 provisioner:
   name: ansible_playbook
@@ -34,8 +23,6 @@ provisioner:
   idempotency_test: true
   require_chef_for_busser: false
   always_update_cookbooks: true
-  #playbook: test.yml
-  #playbook: roles/common/tests/test.yml
   playbook: roles/githubfoam.openvswitch/tests/test.yml
   hosts: all
   additional_copy_path:
